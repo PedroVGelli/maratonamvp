@@ -1,0 +1,27 @@
+/* Paleta de cores laranja e cinza carbono */
+body {
+    background-color: #333333; /* Cinza carbono */
+    color: #f8f9fa; /* Branco */
+}
+.titulo-pagina {
+    color: #FFA500; /* Laranja */
+    margin: 20px 0;
+}
+.btn-laranja {
+    background-color: #FFA500; /* Laranja */
+    border-color: #FFA500;
+    color: #333333; /* Cinza carbono */
+}
+.btn-laranja:hover {
+    background-color: #e69500; /* Laranja mais escuro */
+    border-color: #e69500;
+}
+.table {
+    color: #f8f9fa; /* Branco */
+}
+.table th {
+    background-color: #FFA500; /* Laranja */
+}
+.table td {
+    background-color: #444444; /* Cinza carbono mais claro */
+}
