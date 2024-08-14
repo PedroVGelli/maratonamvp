@@ -1,4 +1,6 @@
 <?php require 'header.php'?>
+<div class="p-3 mb-2 bg-dark text-white">
+
 <div class="container mt-5">
     <h1 class="text-center">Gerenciamento de Consumo de Alimentos</h1>
 
@@ -26,7 +28,7 @@
             <input type="text" class="form-control" name="preco_unitario" required>
         </div>
         <div class="col-md-12 text-end">
-            <button type="submit" name="adicionar" class="btn btn-laranja">Adicionar</button>
+            <button type="submit" name="adicionar" class="btn btn-success">Adicionar</button>
         </div>
     </form>
 
@@ -177,6 +179,6 @@ document.getElementById('btn-gerar-relatorio').addEventListener('click', async f
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script></div>
 </body>
 </html>

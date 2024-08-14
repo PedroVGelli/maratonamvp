@@ -55,9 +55,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 <?php require 'header.php' ?>
-
+ <div class="p-3 mb-2 bg-dark text-white">
 <div class="container mt-5">
-    <h1 class="titulo-pagina text-center">Gerenciamento de Alimentos</h1>
+    <h1 class="titulo-pagina text-center" >Gerenciamento de Alimentos</h1>
+   
 
     <div class="usuario-adm">
         <!-- Formulário para adicionar um novo alimento -->
@@ -197,6 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </form>
     </div>
 </div>
-
+</div>
 </body>
 </html>
