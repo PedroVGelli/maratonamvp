@@ -1,5 +1,59 @@
 
-<?php require 'config.php'?>
+
+<?php
+require 'config.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['adicionar'])) {
+        // Adicionar um novo alimento
+        $stmt = $pdo->prepare("INSERT INTO alimentos (nome, categoria, descricao, data_validade, quantidade, unidade_media, preco_unitario, data_entrada, status_alimento, fornecedor_id) VALUES (:nome, :categoria, :descricao, :data_validade, :quantidade, :unidade_media, :preco_unitario, :data_entrada, :status_alimento, :fornecedor_id)");
+        $stmt->execute([
+            ':nome' => $_POST['nome'],
+            ':categoria' => $_POST['categoria'],
+            ':descricao' => $_POST['descricao'],
+            ':data_validade' => $_POST['data_validade'],
+            ':quantidade' => $_POST['quantidade'],
+            ':unidade_media' => $_POST['unidade_media'],
+            ':preco_unitario' => $_POST['preco_unitario'],
+            ':data_entrada' => $_POST['data_entrada'],
+            ':status_alimento' => $_POST['status_alimento'],
+            ':fornecedor_id' => $_POST['fornecedor_id']
+        ]);
+        header('Location: '.$_SERVER['PHP_SELF']);
+        exit;
+    }
+
+    if (isset($_POST['editar'])) {
+        // Editar um alimento existente
+        $stmt = $pdo->prepare("UPDATE alimentos SET nome = :nome, categoria = :categoria, descricao = :descricao, data_validade = :data_validade, quantidade = :quantidade, unidade_media = :unidade_media, preco_unitario = :preco_unitario, data_entrada = :data_entrada, status_alimento = :status_alimento, fornecedor_id = :fornecedor_id WHERE id_alimentos = :id_alimentos");
+        $stmt->execute([
+            ':nome' => $_POST['nome'],
+            ':categoria' => $_POST['categoria'],
+            ':descricao' => $_POST['descricao'],
+            ':data_validade' => $_POST['data_validade'],
+            ':quantidade' => $_POST['quantidade'],
+            ':unidade_media' => $_POST['unidade_media'],
+            ':preco_unitario' => $_POST['preco_unitario'],
+            ':data_entrada' => $_POST['data_entrada'],
+            ':status_alimento' => $_POST['status_alimento'],
+            ':fornecedor_id' => $_POST['fornecedor_id'],
+            ':id_alimentos' => $_POST['id_alimentos']
+        ]);
+        header('Location: '.$_SERVER['PHP_SELF']);
+        exit;
+    }
+
+    if (isset($_POST['excluir'])) {
+        // Excluir alimentos selecionados
+        if (!empty($_POST['ids'])) {
+            $ids = implode(',', array_map('intval', $_POST['ids']));
+            $stmt = $pdo->query("DELETE FROM alimentos WHERE id_alimentos IN ($ids)");
+        }
+        header('Location: '.$_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+?>
 <?php require 'header.php' ?>
 
 <div class="container mt-5">

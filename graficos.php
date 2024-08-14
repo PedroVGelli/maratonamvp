@@ -46,19 +46,20 @@
     <div class="mt-4 text-center">
         <button class="btn btn-primary" id="btn-semanal">Consumo Semanal</button>
         <button class="btn btn-secondary" id="btn-mensal">Consumo Mensal</button>
+        <a href="index.php"  class="btn btn-primary" >Ir para os alimentos</a>
         <button class="btn btn-success" id="btn-gerar-relatorio">Gerar Relatório PDF</button>
-        <a href="index.php"  class="btn btn-primary" >Retornar para alimentos</a>
+
 
     </div>
 
-    <!-- Gráfico de Consumo -->
+    <!-- Gráfico -->
     <div class="mt-4">
         <canvas id="grafico-consumo"></canvas>
     </div>
 </div>
 
 <script>
-// Arrays para armazenar os dados
+
 let alimentos = [];
 let setores = [];
 
@@ -87,7 +88,6 @@ document.getElementById('form-alimentos').addEventListener('submit', function (e
     atualizarGrafico('mensal');
 });
 
-// Função para atualizar o gráfico
 function atualizarGrafico(periodo) {
     let ctx = document.getElementById('grafico-consumo').getContext('2d');
     
@@ -125,7 +125,6 @@ function atualizarGrafico(periodo) {
     });
 }
 
-//  botões de alternância
 document.getElementById('btn-semanal').addEventListener('click', function () {
     atualizarGrafico('semanal');
 });
@@ -134,7 +133,6 @@ document.getElementById('btn-mensal').addEventListener('click', function () {
     atualizarGrafico('mensal');
 });
 
-// Listener para o filtro por setor
 document.getElementById('setor_filtro').addEventListener('change', function () {
     atualizarGrafico('mensal');
 });
@@ -153,37 +151,31 @@ document.getElementById('btn-gerar-relatorio').addEventListener('click', async f
                 const img = new Image();
                 img.src = URL.createObjectURL(blob);
                 img.onload = function () {
-                    doc.addImage(img, 'PNG', 10, 10, 180, 100); // Ajuste as coordenadas e tamanho conforme necessário
+                    doc.addImage(img, 'PNG', 10, 10, 180, 100); 
                     resolve();
                 };
             });
         });
     }
 
-    // Captura do gráfico de consumo
     const canvasGrafico = document.getElementById('grafico-consumo');
     const graficoCanvas = await html2canvas(canvasGrafico);
     await adicionarImagemAoPDF(graficoCanvas, 'Gráfico de Consumo');
 
-    // Adiciona uma nova página para o gráfico mensal
     doc.addPage();
     const filtroSetor = document.getElementById('setor_filtro').value;
     const periodo = filtroSetor === 'Todos' ? 'Mensal' : filtroSetor;
     doc.text(`Relatório de Consumo ${periodo}`, 10, 10);
 
-    // Adiciona ao PDF
     const canvasGraficoAtual = document.getElementById('grafico-consumo');
     const graficoAtualCanvas = await html2canvas(canvasGraficoAtual);
     await adicionarImagemAoPDF(graficoAtualCanvas, 'Gráfico de Consumo');
 
-    // Salva o PDF
     doc.save(`Relatorio_Consumo_${periodo}.pdf`);
 });
 </script>
 
 
-
-<!-- Bootstrap JS  -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
